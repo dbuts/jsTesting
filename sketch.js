@@ -1,18 +1,26 @@
 var rows = 50;
 var cols = 50;
 var cells = [];
+var i = 0;
 
 function setup() {
 	createCanvas(500,500);
     generateGrid(); 
-//    console.log("Rows: " + cells.length);
- //   console.log("Cols: " + cells[0].length);
+    update();
+    drawGrid();
 }
 
 function draw() {
-    background(51);
-    update();
-    drawGrid();
+    //background(51,100,0);
+    setTimeout(update, 1000);
+    setTimeout(drawGrid, 3000);
+    setTimeout(printer, 3000);
+
+}
+
+function printer(){
+    console.log(i);
+    i++;
 }
 
 function generateGrid(){
@@ -24,8 +32,8 @@ function generateGrid(){
         cells.push(currRow); 
     }
     cells[0][0].state = 1;
-    //cells[0][1].state = 1;
-    //cells[0][2].state = 1;
+    cells[0][1].state = 1;
+    cells[0][2].state = 1;
     cells[1][0].state = 1;
 }
 
@@ -89,19 +97,19 @@ function aliveNeighbors(cell){
     for(i = minX; i<=maxX; i++){
        for(j = minY; j<=maxY; j++){
            if(cell.x == i && cell.y == j){
-             //  console.log("Current Cell: " + i + ", " +j);
+              //console.log("Current Cell: " + i + ", " +j);
            }
            else{
               // console.log("X: " + cell.x + "Y: " + cell.y);
               count++;
-              console.log(count);
+             // console.log(count);
                if(cells[i][j].state == 1){
                    rtn+=1;
                }
            }
        }
     }
-    console.log("Neighbors: " + rtn);
+    //console.log("Neighbors: " + rtn);
     return rtn;
 }
 
